@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <style>
+        body {
+            width: 220px;
+            padding: 15px;
+            font-family: sans-serif;
+            text-align: center;
+        }
+
+        .botoes {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 15px;
+        }
+
+        button {
+            padding: 10px;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+            color: white;
+            font-weight: bold;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        #btnStart {
+            background: #007bff;
+        }
+
+        #btnStart:hover:not(:disabled) {
+            background: #0056b3;
+        }
+
+        #btnStop {
+            background: #dc3545;
+        }
+
+        #btnStop:hover:not(:disabled) {
+            background: #b02a37;
+        }
+    </style>
+</head>
+
+<body>
+    <h3>Tradutor Vosk</h3>
+    <div class="botoes">
+        <button id="btnStart">Ouvir Vídeo</button>
+        <button id="btnStop" disabled>Parar</button>
+    </div>
+    <script src="popup.js"></script>
+</body>
+
+</html>

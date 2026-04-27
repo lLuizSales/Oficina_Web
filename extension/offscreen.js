@@ -17,7 +17,7 @@ chrome.runtime.onMessage.addListener(async (message) => {
 });
 
 function conectarVosk() {
-    ws = new WebSocket('ws://localhost:2700'); 
+    ws = new WebSocket('ws://localhost:8765'); 
     ws.onopen = () => console.log("Conectado ao Vosk!");
     ws.onmessage = (event) => {
         const resultado = JSON.parse(event.data);

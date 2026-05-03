@@ -1,13 +1,13 @@
+let widgetTabId = null;
+
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "INICIAR_CAPTURA") {
-        iniciarCapturaDaAba();
+        iniciarCapturaDaAba();  // removeu o abrirWidget() daqui
     } else if (request.action === "PARAR_CAPTURA") {
         pararCaptura();
     }
 });
-
 async function iniciarCapturaDaAba() {
-    // ... (mantenha a função iniciarCapturaDaAba exatamente como estava) ...
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab) return;
 
@@ -34,15 +34,12 @@ async function iniciarCapturaDaAba() {
     });
 }
 
-// NOVA FUNÇÃO AQUI:
 async function pararCaptura() {
-    // 1. Avisa o offscreen para fechar conexões e parar o áudio
     chrome.runtime.sendMessage({
         target: 'offscreen',
         type: 'PARAR_AUDIO'
     });
 
-    // 2. Aguarda meio segundo e destrói o documento invisível
     setTimeout(async () => {
         const existingContexts = await chrome.runtime.getContexts({
             contextTypes: ['OFFSCREEN_DOCUMENT']

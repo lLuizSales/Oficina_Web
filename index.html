@@ -402,6 +402,83 @@
   }
   .pill:hover { border-color: var(--accent); color: var(--accent); }
 
+  /* INSTALACAO */
+  .instalacao { background: var(--black); color: var(--white); }
+  .instalacao .section-label { color: #7ab3e0; }
+  .instalacao .section-title { color: var(--white); }
+
+  .install-tabs {
+    display: flex; gap: 0;
+    border: 1px solid #1e1e1e;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 48px;
+  }
+  .install-tab-panel {
+    flex: 1;
+    border-right: 1px solid #1e1e1e;
+    padding: 36px 32px;
+  }
+  .install-tab-panel:last-child { border-right: none; }
+
+  .tab-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 2px;
+    text-transform: uppercase; color: #7ab3e0;
+    margin-bottom: 12px;
+  }
+  .tab-title {
+    font-family: var(--serif);
+    font-size: 20px;
+    color: var(--white);
+    margin-bottom: 24px;
+    font-weight: 400;
+  }
+  .install-steps-list {
+    list-style: none;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .install-steps-list li {
+    display: flex; gap: 14px; align-items: flex-start;
+  }
+  .step-badge {
+    width: 24px; height: 24px; min-width: 24px;
+    background: var(--accent);
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 500; color: white;
+    margin-top: 1px;
+  }
+  .install-steps-list li p {
+    font-size: 14px; color: #aaa; line-height: 1.6;
+  }
+  .install-steps-list li p strong { color: #e0e0e0; font-weight: 500; }
+  .install-steps-list li code {
+    display: inline-block;
+    background: #1a1a1a;
+    border: 1px solid #2a2a2a;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-family: monospace;
+    font-size: 12px;
+    color: #7ab3e0;
+    margin-top: 4px;
+  }
+  .install-req {
+    margin-top: 20px;
+    padding: 14px 16px;
+    background: #111;
+    border: 1px solid #1e1e1e;
+    border-radius: 8px;
+    font-size: 13px;
+    color: #666;
+    line-height: 1.6;
+  }
+  .install-req a {
+    color: #7ab3e0;
+    text-decoration: none;
+    border-bottom: 1px solid #2a4a6a;
+  }
+
   /* FOOTER */
   footer {
     border-top: 1px solid var(--border);
@@ -442,6 +519,7 @@
     <a href="#problema">Problema</a>
     <a href="#como-funciona">Como funciona</a>
     <a href="#diferenciais">Diferenciais</a>
+    <a href="#instalacao">Instalação</a>
     <a href="#download">Download</a>
   </div>
 </nav>
@@ -539,6 +617,79 @@
       <h3>Avatar VLibras Gov</h3>
       <p>Integrado ao player oficial do governo brasileiro — tecnologia validada, mantida e reconhecida institucionalmente.</p>
     </div>
+  </div>
+</section>
+
+<!-- INSTALACAO -->
+<section class="instalacao" id="instalacao">
+  <p class="section-label reveal">Instalação</p>
+  <h2 class="section-title reveal">Em dois passos,<br>tudo <em>funcionando.</em></h2>
+  <div class="install-tabs reveal">
+
+    <!-- SERVIDOR PYTHON -->
+    <div class="install-tab-panel">
+      <div class="tab-label">Passo 1</div>
+      <div class="tab-title">Servidor Python</div>
+      <ul class="install-steps-list">
+        <li>
+          <div class="step-badge">1</div>
+          <p><strong>Clone o repositório e entre na pasta do servidor:</strong><br>
+          <code>cd server</code></p>
+        </li>
+        <li>
+          <div class="step-badge">2</div>
+          <p><strong>Crie e ative  um ambiente virtual:</strong><br>
+          <code>python -m venv venv</code><br>
+          <code>venv\Scripts\activate</code> <span style="color:#555">(Windows)</span></p>
+        </li>
+        <li>
+          <div class="step-badge">3</div>
+          <p><strong>Instale as dependências:</strong><br>
+          <code>pip install -r requirements.txt</code></p>
+        </li>
+        <li>
+          <div class="step-badge">4</div>
+          <p><strong>Baixe o modelo Vosk (pt-BR) e extraia em </strong><code>server/models/</code></p>
+        </li>
+        <li>
+          <div class="step-badge">5</div>
+          <p><strong>Inicie o servidor:</strong><br>
+          <code>python main.py</code></p>
+        </li>
+      </ul>
+      <div class="install-req">
+        Requer Python 3.8+. Modelo: <a href="https://alphacephei.com/vosk/models" target="_blank">vosk-model-small-pt-0.3</a>
+      </div>
+    </div>
+
+    <!-- EXTENSAO CHROME -->
+    <div class="install-tab-panel">
+      <div class="tab-label">Passo 2</div>
+      <div class="tab-title">Extensão no Chrome</div>
+      <ul class="install-steps-list">
+        <li>
+          <div class="step-badge">1</div>
+          <p><strong>Abra  o gerenciador de extensões do Chrome:</strong><br>
+          <code>chrome://extensions</code></p>
+        </li>
+        <li>
+          <div class="step-badge">2</div>
+          <p><strong>Ativeo Modo do desenvolvedor no canto superior direito.</strong></p>
+        </li>
+        <li>
+          <div class="step-badge">3</div>
+          <p><strong>Clique em "Carregar sem compactação" e selecione a pasta </strong><code>extensao/</code> do repositório.</p>
+        </li>
+        <li>
+          <div class="step-badge">4</div>
+          <p><strong>Com o servidor rodando, abra qualquer aba com vídeo e clique no ícone da extensão para iniciar.</strong></p>
+        </li>
+      </ul>
+      <div class="install-req">
+        Compatível com Google Chrome e navegadores baseados em Chromium (Edge, Brave).
+      </div>
+    </div>
+
   </div>
 </section>
 

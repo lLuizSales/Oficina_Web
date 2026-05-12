@@ -1,10 +1,8 @@
-// ── Estado ──────────────────────────────────────────────
 const queue = [];
 let paused = false;
 let listening = false;
 let wsVlibras = null;
 
-// ── Elementos ────────────────────────────────────────────
 const connBadge  = document.getElementById('conn-badge');
 const connLabel  = document.getElementById('conn-label');
 const nowText    = document.getElementById('now-text');
@@ -20,7 +18,6 @@ const listenBtn  = document.getElementById('listen-btn');
 const listenIcon = document.getElementById('listen-icon');
 const listenLabel= document.getElementById('listen-label');
 
-// ── WebSocket para o VLibras (porta 8766) ─────────────────
 function conectarVlibras() {
     wsVlibras = new WebSocket('ws://localhost:8766');
 
@@ -40,7 +37,6 @@ function conectarVlibras() {
     };
 }
 
-// ── Helpers de UI ─────────────────────────────────────────
 function setConn(online) {
     connBadge.className = 'conn-badge ' + (online ? 'on' : 'off');
     connLabel.textContent = online ? 'Online' : 'Offline';
@@ -88,7 +84,6 @@ function setIdle() {
     statusMsg.textContent = queue.length > 0 ? `${queue.length} item(s) na fila` : 'Parado';
 }
 
-// ── Fila ──────────────────────────────────────────────────
 function enqueue(text) {
     queue.push(text);
     renderQueue();
@@ -110,7 +105,6 @@ function removeItem(index) {
     if (queue.length === 0) setIdle();
 }
 
-// ── Controles ─────────────────────────────────────────────
 function togglePause() {
     paused = !paused;
     if (paused) {
@@ -134,7 +128,6 @@ function clearQueue() {
     setIdle();
 }
 
-// ── Captura (ouvir vídeo) ─────────────────────────────────
 function toggleCaptura() {
     listening = !listening;
     if (listening) {
@@ -159,14 +152,12 @@ function toggleCaptura() {
     }
 }
 
-// ── Escuta textos transcritos vindos do offscreen ─────────
 chrome.runtime.onMessage.addListener((msg) => {
     if (msg.action === 'TEXTO_TRANSCRITO' && msg.text) {
         enqueue(msg.text);
     }
 });
 
-// ── Event listeners ──────────────────────────────────────
 document.getElementById('pause-btn').addEventListener('click', togglePause);
 document.getElementById('clear-btn').addEventListener('click', clearQueue);
 document.getElementById('listen-btn').addEventListener('click', toggleCaptura);
@@ -175,11 +166,9 @@ document.getElementById('queue-list').addEventListener('click', (e) => {
     if (btn) removeItem(Number(btn.dataset.index));
 });
 
-// ── Init ──────────────────────────────────────────────────
 conectarVlibras();
 renderQueue();
 
-// Verifica se já havia uma captura rodando ao reabrir o painel
 chrome.runtime.sendMessage({ action: 'GET_STATUS' }, (res) => {
     if (res && res.listening) {
         listening = true;

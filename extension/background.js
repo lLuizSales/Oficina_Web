@@ -1,12 +1,22 @@
-let widgetTabId = null;
+let isListening = false;
+
+chrome.action.onClicked.addListener((tab) => {
+    chrome.sidePanel.open({ windowId: tab.windowId });
+});
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.action === "INICIAR_CAPTURA") {
-        iniciarCapturaDaAba();  // removeu o abrirWidget() daqui
+        isListening = true;
+        iniciarCapturaDaAba();
     } else if (request.action === "PARAR_CAPTURA") {
+        isListening = false;
         pararCaptura();
+    } else if (request.action === "GET_STATUS") {
+        sendResponse({ listening: isListening });
     }
+    return true;
 });
+
 async function iniciarCapturaDaAba() {
     const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
     if (!tab) return;

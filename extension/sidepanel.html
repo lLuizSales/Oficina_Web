@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <title>VLibras · Painel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue:      #2563EB;
+      --blue-lt:   #EFF6FF;
+      --blue-mid:  #BFDBFE;
+      --blue-dk:   #1D4ED8;
+      --green:     #16A34A;
+      --green-lt:  #DCFCE7;
+      --red:       #DC2626;
+      --red-lt:    #FEE2E2;
+      --gray-50:   #F9FAFB;
+      --gray-100:  #F3F4F6;
+      --gray-200:  #E5E7EB;
+      --gray-400:  #9CA3AF;
+      --gray-600:  #4B5563;
+      --gray-900:  #111827;
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 14px;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--gray-50);
+      color: var(--gray-900);
+      width: 100%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ── Header ── */
+    .header {
+      background: #fff;
+      border-bottom: 1px solid var(--gray-200);
+      padding: 14px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .logo {
+      width: 34px; height: 34px;
+      background: var(--blue);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+    .header-text { flex: 1; }
+    .header-title { font-size: 14px; font-weight: 500; color: var(--gray-900); }
+    .header-sub   { font-size: 11px; color: var(--gray-400); margin-top: 1px; }
+
+    .conn-badge {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 3px 9px;
+      border-radius: 999px;
+      display: flex; align-items: center; gap: 4px;
+      transition: all 0.3s;
+    }
+    .conn-badge.on  { background: var(--green-lt); color: var(--green); }
+    .conn-badge.off { background: var(--red-lt);   color: var(--red);   }
+    .conn-badge .dot {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* ── Body ── */
+    .body { flex: 1; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 12px; }
+
+    /* ── Cards ── */
+    .card {
+      background: #fff;
+      border: 1px solid var(--gray-200);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--gray-100);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .card-label {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--gray-400);
+    }
+    .card-body { padding: 12px 14px; }
+
+    /* ── Now playing ── */
+    .now-box {
+      background: var(--blue-lt);
+      border-radius: var(--radius-md);
+      padding: 10px 12px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .now-box .ti { font-size: 16px; color: var(--blue); flex-shrink: 0; }
+    .now-text {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--blue-dk);
+      white-space: normal;
+      word-break: break-word;
+      line-height: 1.5;
+    }
+    .now-idle { color: var(--gray-400); font-weight: 400; font-style: italic; }
+    .bars {
+      display: flex; gap: 2px; align-items: flex-end; height: 14px; flex-shrink: 0;
+    }
+    .bars span {
+      width: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      animation: bar 0.8s ease-in-out infinite;
+    }
+    .bars span:nth-child(2) { animation-delay: 0.15s; }
+    .bars span:nth-child(3) { animation-delay: 0.30s; }
+    @keyframes bar { 0%,100%{ height:3px } 50%{ height:13px } }
+    .bars.hidden { display: none; }
+
+    .status-line {
+      margin-top: 8px;
+      font-size: 12px;
+      color: var(--gray-400);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .status-line .ti { font-size: 13px; }
+
+    /* ── Queue ── */
+    .queue-list { display: flex; flex-direction: column; }
+    .queue-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 14px;
+      border-bottom: 1px solid var(--gray-100);
+      font-size: 13px;
+      color: var(--gray-600);
+      transition: background 0.15s;
+    }
+    .queue-item:last-child { border-bottom: none; }
+    .queue-item:hover { background: var(--gray-50); }
+    .q-num {
+      font-size: 10px;
+      font-weight: 500;
+      color: var(--gray-400);
+      width: 16px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+    .q-text { flex: 1; white-space: normal; word-break: break-word; line-height: 1.4; }
+    .q-del {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--gray-400);
+      font-size: 13px;
+      padding: 2px 4px;
+      border-radius: 4px;
+      line-height: 1;
+      display: flex; align-items: center;
+      transition: all 0.15s;
+    }
+    .q-del:hover { background: var(--red-lt); color: var(--red); }
+
+    .queue-empty {
+      padding: 16px 14px;
+      font-size: 13px;
+      color: var(--gray-400);
+      font-style: italic;
+      text-align: center;
+    }
+
+    /* ── Controls ── */
+    .controls { padding: 12px 14px; display: flex; gap: 8px; }
+    .btn {
+      flex: 1;
+      padding: 9px 12px;
+      border-radius: var(--radius-md);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
+      transition: opacity 0.15s, background 0.15s;
+    }
+    .btn:active { transform: scale(0.98); }
+    .btn-blue  { background: var(--blue);  color: #fff; }
+    .btn-blue:hover { background: var(--blue-dk); }
+    .btn-blue.paused { background: var(--green); }
+    .btn-blue.paused:hover { background: #15803D; }
+    .btn-outline {
+      background: #fff;
+      color: var(--gray-600);
+      border: 1px solid var(--gray-200);
+    }
+    .btn-outline:hover { background: var(--red-lt); color: var(--red); border-color: #FECACA; }
+    .btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+    /* ── Main action ── */
+    .main-action { padding: 0 14px 14px; }
+    .btn-listen {
+      width: 100%;
+      padding: 11px;
+      border-radius: var(--radius-md);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      display: flex; align-items: center; justify-content: center; gap: 7px;
+      transition: all 0.2s;
+      background: var(--blue);
+      color: #fff;
+    }
+    .btn-listen:hover { background: var(--blue-dk); }
+    .btn-listen.listening { background: var(--red); }
+    .btn-listen.listening:hover { background: #B91C1C; }
+
+    /* ── Footer ── */
+    .footer {
+      margin-top: auto;
+      padding: 10px 16px 14px;
+      font-size: 11px;
+      color: var(--gray-400);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      border-top: 1px solid var(--gray-100);
+    }
+    .footer .ti { font-size: 12px; }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo"><i class="ti ti-hand-stop" aria-hidden="true"></i></div>
+    <div class="header-text">
+      <div class="header-title">VLibras</div>
+      <div class="header-sub">Tradutor Vosk + Libras</div>
+    </div>
+    <div class="conn-badge off" id="conn-badge">
+      <span class="dot"></span><span id="conn-label">Offline</span>
+    </div>
+  </div>
+
+  <div class="body">
+
+    <!-- Reproduzindo agora -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-label">Reproduzindo agora</span>
+      </div>
+      <div class="card-body">
+        <div class="now-box">
+          <i class="ti ti-player-play" aria-hidden="true"></i>
+          <span class="now-text now-idle" id="now-text">Aguardando texto...</span>
+          <div class="bars hidden" id="bars">
+            <span></span><span></span><span></span>
+          </div>
+        </div>
+        <div class="status-line">
+          <i class="ti ti-clock" aria-hidden="true"></i>
+          <span id="status-msg">Parado</span>
+        </div>
+      </div>
+      <div class="controls">
+        <button class="btn btn-blue" id="pause-btn" disabled>
+          <i class="ti ti-player-pause" id="pause-icon" aria-hidden="true"></i>
+          <span id="pause-label">Pausar</span>
+        </button>
+        <button class="btn btn-outline" id="clear-btn" disabled>
+          <i class="ti ti-trash" aria-hidden="true"></i> Limpar fila
+        </button>
+      </div>
+    </div>
+
+    <!-- Fila -->
+    <div class="card">
+      <div class="card-header">
+        <span class="card-label">Fila de tradução</span>
+        <span style="font-size:11px; color: var(--gray-400);" id="q-count">0 pendentes</span>
+      </div>
+      <div id="queue-list" class="queue-list">
+        <div class="queue-empty">Nenhum texto na fila</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Botão ouvir/parar captura -->
+  <div class="main-action" style="padding-top: 14px;">
+    <button class="btn-listen" id="listen-btn">
+      <i class="ti ti-microphone" id="listen-icon" aria-hidden="true"></i>
+      <span id="listen-label">Ouvir vídeo</span>
+    </button>
+  </div>
+
+  <div class="footer">
+    <i class="ti ti-plug" aria-hidden="true"></i>
+    ws://localhost:8766 · ws://localhost:8765
+  </div>
+
+  <script src="sidepanel.js"></script>
+</body>
+</html>

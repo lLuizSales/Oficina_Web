@@ -23,6 +23,9 @@ function conectarVosk() {
         if (resultado.text) {
             if (resultado.final) {
                 console.log("%c FINAL: " + resultado.text, "color: green; font-weight: bold; font-size: 14px;");
+                 chrome.runtime.sendMessage({
+                action: 'TEXTO_TRANSCRITO',
+                text: resultado.text });
             } else {
                 console.log("Parcial:", resultado.text);
             }
@@ -38,6 +41,9 @@ async function capturarEProcessar(streamId) {
         });
 
         audioContext = new AudioContext({ sampleRate: 16000 });
+        audioContext.onstatechange = () => {
+        if (audioContext.state === 'suspended') audioContext.resume();
+        };
         source = audioContext.createMediaStreamSource(mediaStream);
         source.connect(audioContext.destination);
 

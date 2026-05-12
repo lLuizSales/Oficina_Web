@@ -59,7 +59,7 @@ O sistema foi desenhado para ser rápido e não obstrutivo, operando da seguinte
                                          ▼
                                   [VLibras Avatar 3D]
                                   (injetado via z-index)
-
+```
 
 # Como Rodar o Servidor (Teste Local do Modelo)
 Atualmente, o servidor está configurado para testar o reconhecimento de voz via microfone antes da implementação completa do WebSocket.

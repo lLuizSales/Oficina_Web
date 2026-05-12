@@ -39,7 +39,6 @@
       flex-direction: column;
     }
 
-    /* ── Header ── */
     .header {
       background: #fff;
       border-bottom: 1px solid var(--gray-200);
@@ -77,10 +76,8 @@
       background: currentColor;
     }
 
-    /* ── Body ── */
     .body { flex: 1; padding: 14px 14px 0; display: flex; flex-direction: column; gap: 12px; }
 
-    /* ── Cards ── */
     .card {
       background: #fff;
       border: 1px solid var(--gray-200);
@@ -103,7 +100,6 @@
     }
     .card-body { padding: 12px 14px; }
 
-    /* ── Now playing ── */
     .now-box {
       background: var(--blue-lt);
       border-radius: var(--radius-md);
@@ -147,7 +143,6 @@
     }
     .status-line .ti { font-size: 13px; }
 
-    /* ── Queue ── */
     .queue-list { display: flex; flex-direction: column; }
     .queue-item {
       display: flex;
@@ -192,7 +187,6 @@
       text-align: center;
     }
 
-    /* ── Controls ── */
     .controls { padding: 12px 14px; display: flex; gap: 8px; }
     .btn {
       flex: 1;
@@ -219,7 +213,6 @@
     .btn-outline:hover { background: var(--red-lt); color: var(--red); border-color: #FECACA; }
     .btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
 
-    /* ── Main action ── */
     .main-action { padding: 0 14px 14px; }
     .btn-listen {
       width: 100%;
@@ -268,7 +261,6 @@
 
   <div class="body">
 
-    <!-- Reproduzindo agora -->
     <div class="card">
       <div class="card-header">
         <span class="card-label">Reproduzindo agora</span>
@@ -297,7 +289,6 @@
       </div>
     </div>
 
-    <!-- Fila -->
     <div class="card">
       <div class="card-header">
         <span class="card-label">Fila de tradução</span>

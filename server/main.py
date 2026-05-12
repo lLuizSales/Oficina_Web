@@ -9,7 +9,7 @@ MODEL_PATH = "./models/vosk-model-small-pt-0.3"
 SAMPLE_RATE = 16000
 
 widget_client = None
-pending_queue = []  # textos aguardando o widget conectar
+pending_queue = []  
 
 def timestamp():
     return time.strftime("%H:%M:%S")

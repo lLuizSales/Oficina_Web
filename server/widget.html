@@ -17,7 +17,6 @@
         font-family: 'DM Sans', sans-serif;
       }
 
-      /* ── VLibras overrides ── */
       [vw] {
         position: fixed !important;
         top: 0 !important; left: 0 !important;
@@ -38,7 +37,6 @@
       [vp] .vpw-box,
       [vp] .vpw-controls { border-radius: 0 !important; }
 
-      /* ── Hidden translation target ── */
       #vlibras-target {
         position: fixed;
         top: 50%; left: 50%;
@@ -49,7 +47,6 @@
         font-size: 18px;
       }
 
-      /* ── Frase atual — barra inferior ── */
       #frase-bar {
         position: fixed;
         bottom: 0; left: 0; right: 0;
@@ -61,7 +58,6 @@
         pointer-events: none;
       }
 
-      /* próxima frase (menor, acima) */
       #proxima-frase {
         font-size: 13px;
         color: rgba(255,255,255,0.55);
@@ -84,7 +80,6 @@
         margin-right: 6px;
       }
 
-      /* frase atual (destaque) */
       #frase-atual {
         background: rgba(0,0,0,0.72);
         border-radius: 12px;
@@ -121,7 +116,6 @@
       @keyframes bar { 0%,100%{ height:3px } 50%{ height:14px } }
       .bars.hidden { display: none; }
 
-      /* ── Badge de status (topo direito) ── */
       #status-badge {
         position: fixed;
         top: 12px; right: 12px;
@@ -143,7 +137,6 @@
       .status-dot.on  { background: #4ADE80; }
       .status-dot.off { background: #F87171; }
 
-      /* ── Contador de fila ── */
       #fila-badge {
         position: fixed;
         top: 12px; left: 12px;
@@ -169,16 +162,13 @@
       </div>
     </div>
 
-    <!-- Badge de conexão -->
     <div id="status-badge">
       <span class="status-dot off" id="status-dot"></span>
       <span id="status-text">Offline</span>
     </div>
 
-    <!-- Contador de fila -->
     <div id="fila-badge" id="fila-badge"></div>
 
-    <!-- Barra de frase -->
     <div id="frase-bar">
       <div id="proxima-frase">
         <span id="proxima-label">A seguir</span>
@@ -228,7 +218,6 @@
         } else {
           filaBadge.style.display = "none";
         }
-        // próxima frase
         if (queue.length > 0) {
           proximaFrase.style.display = "block";
           proximaTexto.textContent = queue[0];
@@ -290,7 +279,6 @@
       }
       setTimeout(startObserver, 2000);
 
-      // Fallback: verifica a fila a cada 1s caso o observer nao dispare
       setInterval(() => {
         if (!isAnimating() && queue.length > 0) {
           processQueue();

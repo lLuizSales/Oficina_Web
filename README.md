@@ -69,7 +69,6 @@ Atualmente, o servidor está configurado para testar o reconhecimento de voz via
 - Python 3.8 ou superior
 - Modelo Vosk (pt-BR): baixe e extraia o **vosk-model-small-pt-0.3** em `server/models/`
   - Download: [alphacephei.com/vosk/models](https://alphacephei.com/vosk/models)
-  ```
 
 ## Passo a Passo
 

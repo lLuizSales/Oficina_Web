@@ -135,13 +135,12 @@ function toggleCaptura() {
         listenIcon.className = 'ti ti-player-stop';
         listenLabel.textContent = 'Parar captura';
 
-        // Abre o widget VLibras em janela de fundo
        chrome.windows.create({
-            url: 'http://localhost:8080/widget.html',
-            type: 'popup',
-            width: 500,
-            height: 700,
-            focused: false
+    url: 'http://localhost:8080/widget.html',
+    type: 'popup',
+    width: 500,
+    height: 700,
+    focused: false
 });
         chrome.runtime.sendMessage({ action: 'INICIAR_CAPTURA' });
     } else {

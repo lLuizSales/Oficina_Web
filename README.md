@@ -5,8 +5,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/LanneFV/Oficina_Web)
 ![GitHub last commit](https://img.shields.io/github/last-commit/LanneFV/Oficina_Web)
  
-> Garantindo acessibilidade, autonomia e dignidade através de tradução sintática inteligente em tempo real.
-
 
 # Extensão Web para Tradução de Libras em Tempo Real
 Garantindo acessibilidade, autonomia e dignidade através de tradução sintática inteligente em tempo real.
@@ -71,7 +69,7 @@ Atualmente, o servidor está configurado para testar o reconhecimento de voz via
 - Python 3.8 ou superior
 - Modelo Vosk (pt-BR): baixe e extraia o **vosk-model-small-pt-0.3** em `server/models/`
   - Download: [alphacephei.com/vosk/models](https://alphacephei.com/vosk/models)
-
+  ```
 
 ## Passo a Passo
 
